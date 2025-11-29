@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>福岡親子行 | 蔡氏家族</title>
+    <title>福岡親子聖誕行 | 蔡氏家族</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -25,7 +25,8 @@
                         card: '#ffffff',
                         gold: '#c5a059',
                         alert: '#b91c1c',
-                        success: '#10b981'
+                        success: '#10b981',
+                        christmas: '#15803d' /* Holiday Green */
                     },
                     boxShadow: {
                         'soft': '0 10px 40px -10px rgba(0,0,0,0.05)',
@@ -55,7 +56,7 @@
         
         <div class="px-6 h-16 flex justify-between items-center">
             <div>
-                <h1 class="text-2xl font-serif italic font-bold text-primary tracking-wide">Fukuoka <span class="text-gold">.</span></h1>
+                <h1 class="text-2xl font-serif italic font-bold text-primary tracking-wide">Fukuoka <span class="text-gold">Xmas</span></h1>
             </div>
             <div class="text-xs font-bold tracking-widest uppercase text-gold border border-gold px-2 py-1 rounded-sm">
                 12月 12-19
@@ -98,12 +99,15 @@
                 <template x-for="(event, idx) in days[activeDay].events">
                     <div class="relative pl-8 group">
                         <div class="absolute -left-[5px] top-2 w-[10px] h-[10px] rounded-full border-2 border-bg transition-all duration-300"
-                             :class="event.warning ? 'bg-alert' : 'bg-gold'"></div>
+                             :class="event.isChristmas ? 'bg-christmas' : (event.warning ? 'bg-alert' : 'bg-gold')"></div>
                         
                         <div class="flex items-center gap-3 mb-3">
                             <span class="text-xs font-mono font-bold text-gray-400" x-text="event.time"></span>
                             <template x-if="event.warning">
                                 <span class="text-[9px] text-alert border border-alert px-1.5 py-px rounded-full uppercase font-bold tracking-wide">需預約</span>
+                            </template>
+                            <template x-if="event.isChristmas">
+                                <span class="text-[9px] text-christmas border border-christmas px-1.5 py-px rounded-full uppercase font-bold tracking-wide">聖誕限定</span>
                             </template>
                         </div>
                         
@@ -257,7 +261,6 @@
                 scrollToTop() {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 },
-                // Initial Packing List Data
                 packingList: [
                     {
                         title: '重要文件 (Documents)',
@@ -299,30 +302,31 @@
                         ]
                     }
                 ],
-                // Days Data (Updated Day 2)
                 days: [
                     {
                         shortDate: '12/12', weekday: '週五',
                         title: 'Day 1: 抵達福岡',
-                        desc: 'Arrival & Check-in',
-                        specialAlert: '建議直接搭計程車前往住宿 (¥2,000)，省時省力。',
+                        desc: 'Arrival & Christmas Lights',
+                        specialAlert: '建議直接搭計程車前往住宿 (¥2,000)。晚上可散步去看藍色燈海。',
                         events: [
                             { time: '19:35', title: '抵達福岡機場', type: '航班', imgKey: 'airport,night', note: '入境、領行李。' },
                             { time: '21:00', title: '搭計程車前往住宿', type: '交通', imgKey: 'taxi,japan', note: '前往 Sumiyoshi apartment。' },
-                            { time: '21:30', title: 'Sumiyoshi apartment', type: '住宿', imgKey: 'apartment,interior', note: '辦理入住。晚餐可吃附近的 <strong>West Udon</strong> (24H)。', mapQuery: 'Sumiyoshi apartment Fukuoka' }
+                            { time: '21:30', title: 'Sumiyoshi apartment', type: '住宿', imgKey: 'apartment,interior', note: '辦理入住。' },
+                            { time: '22:00', title: '博多車站光之街', type: '聖誕', imgKey: 'christmas,lights', note: '藍色燈海散步 (Hikari no Machi)，感受聖誕氣氛。', isChristmas: true }
                         ]
                     },
                     {
                         shortDate: '12/13', weekday: '週六',
                         title: 'Day 2: 親子 & 潮流',
                         desc: 'Toys, Hotpot & Streetwear',
-                        specialAlert: '中午餐廳務必預約。晚上取車請檢查車況。',
+                        specialAlert: '中午餐廳務必預約。下午行程包含聖誕市集與麵包名店。',
                         events: [
                             { time: '08:30', title: 'Fuk Coffee', type: '咖啡', imgKey: 'coffee,latte', note: '晨間咖啡時光。' },
                             { time: '10:00', title: '福岡玩具美術館', type: '體驗', imgKey: 'woodentoy', note: 'LaLaport 1F，開門即入場。', mapQuery: 'Fukuoka Toy Museum' },
                             { time: '12:45', title: '博多華味鳥 (博多站前)', type: '午餐', imgKey: 'hotpot,chicken', note: '午間限定水炊御膳。', mapQuery: 'Hakata Hanamidori Hakata Station', warning: true, booked: false },
                             { time: '14:45', title: '天神大名潮流區', type: '購物', imgKey: 'streetwear', note: 'Supreme, Neighborhood, Stussy。', mapQuery: 'Supreme Fukuoka' },
-                            { time: '16:00', title: 'THE FULL FULL TENJIN', type: '美食', imgKey: 'bakery,wine', note: '明太子法國麵包名店 (天神店)，適合逛街中途補充熱量 (需預訂/排隊)。', mapQuery: 'Full Full Pan to Wine Tenjin', warning: true, booked: false },
+                            { time: '16:00', title: '大名花園城聖誕市集', type: '聖誕', imgKey: 'christmas,market', note: 'Christmas Gate 市集，喝杯熱紅酒休息。', isChristmas: true },
+                            { time: '16:45', title: 'THE FULL FULL TENJIN', type: '美食', imgKey: 'bakery,bread', note: '明太子法國麵包名店，適合下午茶。', mapQuery: 'Full Full Pan to Wine Tenjin', warning: true, booked: false },
                             { time: '19:30', title: 'Sky Rental Store 取車', type: '租車', imgKey: 'car,keys', note: '設定往高千穗的導航。', warning: true, booked: false }
                         ]
                     },
@@ -369,27 +373,27 @@
                     {
                         shortDate: '12/17', weekday: '週三',
                         title: 'Day 6: 太宰府電車旅',
-                        desc: 'Shrine & Relax',
-                        specialAlert: '不用早起！直接從天神搭電車去太宰府，行程變輕鬆了。',
+                        desc: 'Shrine, Market & Yatai',
+                        specialAlert: '太宰府電車輕鬆遊。晚上逛天神聖誕市集與中洲夜景。',
                         events: [
-                            { time: '10:00', title: '前往太宰府', type: '交通', imgKey: 'train,japan', note: '天神站搭乘，運氣好可搭到「旅人」列車。' },
+                            { time: '10:00', title: '前往太宰府', type: '交通', imgKey: 'train,japan', note: '天神站搭乘西鐵電車。' },
                             { time: '11:00', title: '太宰府表參道', type: '景點', imgKey: 'starbucks,japan', note: '吃梅枝餅、逛星巴克概念店。', mapQuery: 'Dazaifu Tenmangu' },
-                            { time: '12:00', title: '暖暮拉麵 (太宰府)', type: '午餐', imgKey: 'ramen,bowl', mapQuery: 'Danbo Ramen Dazaifu' },
-                            { time: '13:30', title: '太宰府天滿宮', type: '景點', imgKey: 'shrine,bull', note: '參拜學問之神、摸御神牛。' },
+                            { time: '13:30', title: '太宰府天滿宮', type: '景點', imgKey: 'shrine,bull', note: '參拜學問之神。' },
                             { time: '14:30', title: '太宰府遊樂園', type: '體驗', imgKey: 'amusementpark', note: '復古樂園，小孩放電。' },
-                            { time: '18:30', title: '天神屋台 小金ちゃん', type: '晚餐', imgKey: 'foodstall', note: '體驗炒拉麵 (需排隊)。', mapQuery: 'Kokinchantei' }
+                            { time: '17:40', title: '天神聖誕市集', type: '聖誕', imgKey: 'christmas,santa', note: '市役所前廣場，氣氛最熱鬧。', isChristmas: true },
+                            { time: '18:30', title: '天神屋台 小金ちゃん', type: '晚餐', imgKey: 'foodstall', note: '體驗炒拉麵。', mapQuery: 'Kokinchantei' },
+                            { time: '20:00', title: '中洲光之大道', type: '聖誕', imgKey: 'night,river', note: '那珂川沿岸金色燈飾散步。', isChristmas: true }
                         ]
                     },
                     {
                         shortDate: '12/18', weekday: '週四',
-                        title: 'Day 7: 聖誕市集',
-                        desc: 'Anpanman & Xmas',
-                        specialAlert: '麵包超人館內解決午餐最方便。',
+                        title: 'Day 7: 聖誕市集壓軸',
+                        desc: 'Anpanman & Hakata Xmas',
+                        specialAlert: '麵包超人館內解決午餐最方便。晚上博多站聖誕市集。',
                         events: [
                             { time: '10:00', title: '麵包超人博物館', type: '體驗', imgKey: 'anpanman', note: '午餐於館內享用。', mapQuery: 'Fukuoka Anpanman Children\'s Museum' },
-                            { time: '14:00', title: '川端通商店街', type: '購物', imgKey: 'market,japan', mapQuery: 'Kawabata Shopping Arcade' },
-                            { time: '16:00', title: '博多運河城', type: '購物', imgKey: 'fountain', note: '觀賞整點水舞秀。', mapQuery: 'Canal City Hakata' },
-                            { time: '18:30', title: '聖誕市集 Christmas Market', type: '活動', imgKey: 'christmasmarket', note: '博多車站前，熱紅酒與聖誕美食。', mapQuery: 'JR Hakata Station' }
+                            { time: '16:00', title: '博多運河城', type: '購物', imgKey: 'fountain', note: '觀賞聖誕水舞秀。', mapQuery: 'Canal City Hakata' },
+                            { time: '18:30', title: '博多車站聖誕市集', type: '聖誕', imgKey: 'christmasmarket,night', note: '旅程壓軸！熱紅酒、美食與音樂表演。', isChristmas: true, mapQuery: 'JR Hakata Station' }
                         ]
                     },
                     {
