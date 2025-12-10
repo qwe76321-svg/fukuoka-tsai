@@ -216,8 +216,9 @@
                                         </div>
                                         
                                         <template x-if="!isEditing && event.mapQuery">
-                                            <a :href="'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(event.mapQuery)" target="_blank" class="block mt-4 text-center py-2 text-xs font-bold text-primary border border-gray-200 rounded hover:bg-gray-50">
-                                                <i class="fas fa-map-marker-alt mr-1"></i> 開啟 Google Maps
+                                            <a :href="'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(event.mapQuery)" target="_blank" 
+                                               class="flex items-center justify-center w-full mt-4 py-2.5 text-xs font-bold text-primary bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50 hover:border-gold transition-colors">
+                                                <i class="fas fa-location-dot text-alert mr-2"></i> 📍 導航至此
                                             </a>
                                         </template>
                                     </div>
@@ -332,10 +333,10 @@
                 desc: 'Arrival & Christmas Lights',
                 specialAlert: '建議直接搭計程車前往住宿 (¥2,000)。晚上可散步去看藍色燈海。',
                 events: [
-                    { time: '19:35', title: '抵達福岡機場', type: '航班', imgKey: 'airport,night', note: '<strong>中華航空 CI116</strong><br>TPE 16:25 ➔ FUK 19:35<br>入境手續與領行李。' },
-                    { time: '21:00', title: '搭計程車前往住宿', type: '交通', imgKey: 'taxi,japan', note: '前往 Sumiyoshi apartment。' },
-                    { time: '21:30', title: 'Sumiyoshi apartment', type: '住宿', imgKey: 'apartment,interior', note: '辦理入住。' },
-                    { time: '22:00', title: '博多車站光之街', type: '聖誕', imgKey: 'christmas,lights', note: '藍色燈海散步 (Hikari no Machi)，感受聖誕氣氛。', isChristmas: true }
+                    { time: '19:35', title: '抵達福岡機場', type: '航班', imgKey: 'airport,night', note: '<strong>中華航空 CI116</strong><br>TPE 16:25 ➔ FUK 19:35<br>入境手續與領行李。', mapQuery: 'Fukuoka Airport International Terminal' },
+                    { time: '21:00', title: '搭計程車前往住宿', type: '交通', imgKey: 'taxi,japan', note: '前往 Sumiyoshi apartment。', mapQuery: 'Sumiyoshi, Hakata Ward' },
+                    { time: '21:30', title: 'Sumiyoshi apartment', type: '住宿', imgKey: 'apartment,interior', note: '辦理入住。', mapQuery: 'Sumiyoshi apartment' },
+                    { time: '22:00', title: '博多車站光之街', type: '聖誕', imgKey: 'christmas,lights', note: '藍色燈海散步 (Hikari no Machi)，感受聖誕氣氛。', isChristmas: true, mapQuery: 'JR Hakata Station' }
                 ]
             },
             {
@@ -344,11 +345,11 @@
                 desc: 'Toys, Hotpot & Streetwear',
                 specialAlert: '中午餐廳務必預約。下午行程包含聖誕市集與麵包名店。',
                 events: [
-                    { time: '08:30', title: 'Fuk Coffee', type: '咖啡', imgKey: 'coffee,latte', note: '晨間咖啡時光。', mapQuery: 'FUK COFFEE' },
+                    { time: '08:30', title: 'Fuk Coffee', type: '咖啡', imgKey: 'coffee,latte', note: '晨間咖啡時光。', mapQuery: 'FUK COFFEE Parks' },
                     { time: '10:00', title: '福岡玩具美術館', type: '體驗', imgKey: 'woodentoy', note: 'LaLaport 1F，開門即入場。', mapQuery: 'Fukuoka Toy Museum' },
                     { time: '12:45', title: '博多華味鳥 (博多站前)', type: '午餐', imgKey: 'hotpot,chicken', note: '午間限定水炊御膳。', mapQuery: 'Hakata Hanamidori Hakata Station', isReservation: true, booked: false },
                     { time: '14:45', title: '天神大名潮流區', type: '購物', imgKey: 'streetwear', note: 'Supreme, Neighborhood, Stussy。', mapQuery: 'Supreme Fukuoka' },
-                    { time: '16:00', title: 'THE FULL FULL TENJIN', type: '美食', imgKey: 'bakery,bread', note: '明太子法國麵包名店，適合下午茶。', mapQuery: 'Full Full Pan to Wine Tenjin', isReservation: true, booked: false },
+                    { time: '16:00', title: 'THE FULL FULL TENJIN', type: '美食', imgKey: 'bakery,bread', note: '明太子法國麵包名店，適合下午茶。', mapQuery: 'THE FULL FULL TENJIN', isReservation: true, booked: false },
                     { time: '16:45', title: '大名花園城聖誕市集', type: '聖誕', imgKey: 'christmas,market', note: 'Christmas Gate 市集，喝杯熱紅酒休息。', isChristmas: true, mapQuery: 'Fukuoka Daimyo Garden City' },
                     { time: '19:30', title: 'Sky Rental Store 取車', type: '租車', imgKey: 'car,keys', note: '設定往高千穗的導航。', isReservation: true, booked: false, mapQuery: 'Sky Rental Car Fukuoka' }
                 ]
@@ -374,7 +375,7 @@
                 specialAlert: '早上搶叢林巴士票，下午美術館需預約。',
                 events: [
                     { time: '08:30', title: '九州自然動物園', type: '體驗', imgKey: 'lion,safari', note: '09:00 開園，搶最早場的叢林巴士。', mapQuery: 'African Safari Japan', isReservation: true, booked: false },
-                    { time: '09:30', title: '叢林巴士體驗', type: '體驗', imgKey: 'bus,zoo', note: '餵食體驗約 50 分鐘。' },
+                    { time: '09:30', title: '叢林巴士體驗', type: '體驗', imgKey: 'bus,zoo', note: '餵食體驗約 50 分鐘。', mapQuery: 'African Safari Japan' },
                     { time: '13:00', title: 'COMICO ART MUSEUM', type: '藝術', imgKey: 'museum,architecture', note: '隈研吾建築，村上隆作品。', mapQuery: 'COMICO ART MUSEUM YUFUIN', isReservation: true, booked: false },
                     { time: '14:00', title: '湯之坪街道 & 金鱗湖', type: '景點', imgKey: 'lake,mist', note: '購買 B-Speak 蛋糕捲。', mapQuery: 'Kinrin Lake' },
                     { time: '18:30', title: '燒肉 多牛 (博多站南)', type: '晚餐', imgKey: 'yakiniku', note: 'CP值極高和牛，需現場排隊。', mapQuery: 'Yakiniku Tagyu Hakata' }
@@ -399,13 +400,13 @@
                 desc: 'Shrine, Market & Yatai',
                 specialAlert: '太宰府電車輕鬆遊。晚上逛天神聖誕市集與中洲夜景。',
                 events: [
-                    { time: '10:00', title: '前往太宰府', type: '交通', imgKey: 'train,japan', note: '天神站搭乘西鐵電車。' },
-                    { time: '11:00', title: '太宰府表參道', type: '景點', imgKey: 'starbucks,japan', note: '吃梅枝餅、逛星巴克概念店。', mapQuery: 'Dazaifu Tenmangu' },
-                    { time: '13:30', title: '太宰府天滿宮', type: '景點', imgKey: 'shrine,bull', note: '參拜學問之神。' },
-                    { time: '14:30', title: '太宰府遊樂園', type: '體驗', imgKey: 'amusementpark', note: '復古樂園，小孩放電。' },
+                    { time: '10:00', title: '前往太宰府', type: '交通', imgKey: 'train,japan', note: '天神站搭乘西鐵電車。', mapQuery: 'Nishitetsu Fukuoka (Tenjin) Station' },
+                    { time: '11:00', title: '太宰府表參道', type: '景點', imgKey: 'starbucks,japan', note: '吃梅枝餅、逛星巴克概念店。', mapQuery: 'Dazaifu Tenmangu Omotesando' },
+                    { time: '13:30', title: '太宰府天滿宮', type: '景點', imgKey: 'shrine,bull', note: '參拜學問之神。', mapQuery: 'Dazaifu Tenmangu' },
+                    { time: '14:30', title: '太宰府遊樂園', type: '體驗', imgKey: 'amusementpark', note: '復古樂園，小孩放電。', mapQuery: 'Dazaifu Amusement Park' },
                     { time: '17:40', title: '天神聖誕市集', type: '聖誕', imgKey: 'christmas,santa', note: '市役所前廣場，氣氛最熱鬧。', isChristmas: true, mapQuery: 'Fukuoka City Hall' },
                     { time: '18:30', title: '天神屋台 小金ちゃん', type: '晚餐', imgKey: 'foodstall', note: '體驗炒拉麵。', mapQuery: 'Kokinchantei' },
-                    { time: '20:00', title: '中洲光之大道', type: '聖誕', imgKey: 'night,river', note: '那珂川沿岸金色燈飾散步。', isChristmas: true }
+                    { time: '20:00', title: '中洲光之大道', type: '聖誕', imgKey: 'night,river', note: '那珂川沿岸金色燈飾散步。', isChristmas: true, mapQuery: 'Nakasu' }
                 ]
             },
             {
@@ -425,13 +426,13 @@
                 desc: 'Shopping & Buddha',
                 specialAlert: '早上先寄放行李，利用地鐵移動。',
                 events: [
-                    { time: '09:00', title: '退房 & 寄放行李', type: '交通', imgKey: 'luggage', note: '搭計程車至博多車站置物櫃寄放。' },
+                    { time: '09:00', title: '退房 & 寄放行李', type: '交通', imgKey: 'luggage', note: '搭計程車至博多車站置物櫃寄放。', mapQuery: 'Hakata Station' },
                     { time: '09:30', title: '東長寺 (福岡大佛)', type: '景點', imgKey: 'buddha', note: '地鐵祇園站。參觀木造大佛。', mapQuery: 'Tochoji Temple' },
                     { time: '10:30', title: '大濠公園 & 福岡城跡', type: '景點', imgKey: 'park,lake', note: '星巴克喝咖啡、看草間彌生南瓜。', mapQuery: 'Ohori Park' },
                     { time: '12:15', title: '博多一双拉麵', type: '午餐', imgKey: 'ramen,bubbles', note: '最後午餐 (博多駅東本店)。', mapQuery: 'Hakata Issou' },
-                    { time: '14:00', title: '博多站伴手禮衝刺', type: '購物', imgKey: 'souvenir,japan', note: 'Ming 或 阪急地下街。必買：努努雞、Menbei。' },
-                    { time: '16:00', title: '燕子林廣場 (RF)', type: '景點', imgKey: 'rooftop,city', note: '俯瞰福岡市景。' },
-                    { time: '17:00', title: '前往福岡機場', type: '交通', imgKey: 'airport,taxi', note: '搭計程車前往最省力。' },
+                    { time: '14:00', title: '博多站伴手禮衝刺', type: '購物', imgKey: 'souvenir,japan', note: 'Ming 或 阪急地下街。必買：努努雞、Menbei。', mapQuery: 'Ming Hakata' },
+                    { time: '16:00', title: '燕子林廣場 (RF)', type: '景點', imgKey: 'rooftop,city', note: '俯瞰福岡市景。', mapQuery: 'JR Hakata City Rooftop' },
+                    { time: '17:00', title: '前往福岡機場', type: '交通', imgKey: 'airport,taxi', note: '搭計程車前往最省力。', mapQuery: 'Fukuoka Airport International Terminal' },
                     { time: '20:35', title: '班機起飛', type: '航班', imgKey: 'airplane', note: '<strong>中華航空 CI117</strong><br>FUK 20:35 ➔ TPE 22:20<br>平安返台。' }
                 ]
             }
@@ -443,7 +444,7 @@
                 activeDay: 0,
                 showSavedToast: false,
                 isEditing: false,
-                days: initialDays, // Will be overwritten by localStorage
+                days: initialDays, // Will be overwritten by localStorage if exists
 
                 // Computed property for sorted reservations
                 get sortedReservations() {
@@ -459,6 +460,7 @@
                             }
                         });
                     });
+                    // Since we iterate days in order, this list is naturally sorted by date/time
                     return list;
                 },
 
